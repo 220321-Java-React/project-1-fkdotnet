@@ -1,26 +1,15 @@
 package com.revature;
 
+import io.javalin.Javalin;
+
 public class Launcher {
 
     public static void main(String[] args) {
     	
-    	//here we go again... have fun!!
-    	
-    	/*
-    	  
-    	  
-		       _.---._    /\\
-		    ./'       "--`\//
-		  ./              o \
-		 /./\  )______   \__ \
-		./  / /\ \   | \ \  \ \
-		   / /  \ \  | |\ \  \7
-		    "     "    "  "        
-    	  
-    	  
-    	  Here's an aardvark this time... not as friendly or cute as a dog, but take him anyway.
-    	 
-    	 */
+    	Javalin App = Javalin.create().start(4848);
+    	App.get("/", ctx -> ctx.result("Hello World"));
+    	App.get("/greeting", ctx -> {ctx.res.getWriter().write("greetings from JavaLin demoooooo! Thank god it's friday");});
+
     	
     }
 }
