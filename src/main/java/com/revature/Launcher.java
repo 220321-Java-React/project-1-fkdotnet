@@ -1,15 +1,24 @@
 package com.revature;
 
+import com.revature.controllers.GetAllController;
+import com.revature.controllers.LoginController;
+
 import io.javalin.Javalin;
+import com.revature.service.*;
 
 public class Launcher {
 
     public static void main(String[] args) {
+    	GetAllController GetAll = new GetAllController();
+    	Javalin App = Javalin.create(config -> {
+    		config.enableCorsForAllOrigins();
     	
-    	Javalin App = Javalin.create().start(4848);
-    	App.get("/", ctx -> ctx.result("Hello World"));
-    	App.get("/greeting", ctx -> {ctx.res.getWriter().write("greetings from JavaLin demoooooo! Thank god it's friday");});
-
+    		
     	
-    }
-}
+    	}); 
+    	
+    	App.post(PATH.LOGINJS, LoginController.LoginHandler);
+    	
+    	
+    	}
+    	}
