@@ -17,19 +17,22 @@ public class PGDaoClass implements PostgreDaoInterface {
 	public LoginEntity PostEmpLogin(String UserID, String PW) {
 		
 		String EmpLoginSQL = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?";
-		Optional<Connection> connection = Optional.empty();
+		
 		LoginEntity User = new LoginEntity();
 		
 		
-		connection.ifPresent(conn->{
+		
+		
 			try { 
+				 Connection conn = ConnectionFactory.getConnection();
+
 				PreparedStatement EMPLoginStmt = conn.prepareStatement(EmpLoginSQL); {
 				EMPLoginStmt.setString(1, UserID);
 				EMPLoginStmt.setString(2, PW);
 				ResultSet EmpLoginResults = EMPLoginStmt.executeQuery();
 				
 				while(EmpLoginResults.next()) {
-					
+					System.out.println("in the loop");
 					int UID = EmpLoginResults.getInt("ers_users_id");
 					String UserName = EmpLoginResults.getString("ers_username");
 					String dbPW = EmpLoginResults.getString("ers_password");
@@ -42,6 +45,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 					User.seteMail(Email);
 					User.setUsername(UserName);
 					User.setPass(dbPW);
+					System.out.println(User.toString());
 					}
 				
 				}
@@ -56,7 +60,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				
 			
 			
-		});
+		
 		return User;
 		
 		

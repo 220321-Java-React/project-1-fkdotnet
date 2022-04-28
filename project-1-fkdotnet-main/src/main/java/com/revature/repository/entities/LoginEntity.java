@@ -8,7 +8,7 @@ public class LoginEntity {
 		
 		private int login_id;
 		private String username;
-		private String pass;
+		private String password;
 		private String firstName;
 		private String lastName;
 		private String eMail;
@@ -19,7 +19,7 @@ public class LoginEntity {
 		public LoginEntity(String username, String pass, String firstName, String lastName, String eMail, int roleid) {
 			super();
 			this.username = username;
-			this.pass = pass;
+			this.password = pass;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.eMail = eMail;
@@ -30,7 +30,7 @@ public class LoginEntity {
 			super();
 			
 			this.username = username;
-			this.pass = pass;
+			this.password = pass;
 		}
 
 		public LoginEntity() {
@@ -54,16 +54,16 @@ public class LoginEntity {
 		}
 
 		public String getPass() {
-			return pass;
+			return password;
 		}
 
 		public void setPass(String pass) {
-			this.pass = pass;
+			this.password = pass;
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(login_id, pass, username);
+			return Objects.hash(login_id, password, username);
 		}
 
 		@Override
@@ -78,13 +78,13 @@ public class LoginEntity {
 				return false;
 			}
 			LoginEntity other = (LoginEntity) obj;
-			return login_id == other.login_id && Objects.equals(pass, other.pass)
+			return login_id == other.login_id && Objects.equals(password, other.password)
 					&& Objects.equals(username, other.username);
 		}
 
 		@Override
 		public String toString() {
-			return "LoginEntity [login_id=" + login_id + ", username=" + username + ", pass=" + pass + "]";
+			return "LoginEntity [login_id=" + login_id + ", username=" + username + ", pass=" + password + "]";
 		}
 
 		public String getFirstName() {
