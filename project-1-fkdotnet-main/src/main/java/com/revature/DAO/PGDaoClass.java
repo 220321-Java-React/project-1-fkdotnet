@@ -14,11 +14,11 @@ import com.revature.repository.entities.LoginEntity;
 public class PGDaoClass implements PostgreDaoInterface {
 
 	@Override
-	public Collection <LoginEntity> PostEmpLogin(String UserID, String PW) {
+	public LoginEntity PostEmpLogin(String UserID, String PW) {
 		
 		String EmpLoginSQL = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?";
 		Optional<Connection> connection = Optional.empty();
-		ArrayList<LoginEntity> AddedClass = new ArrayList<>();
+		LoginEntity User = new LoginEntity();
 		
 		
 		connection.ifPresent(conn->{
@@ -29,7 +29,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				ResultSet EmpLoginResults = EMPLoginStmt.executeQuery();
 				
 				while(EmpLoginResults.next()) {
-					Optional <LoginEntity> User = Optional.empty();
+					
 					int UID = EmpLoginResults.getInt("ers_users_id");
 					String UserName = EmpLoginResults.getString("ers_username");
 					String dbPW = EmpLoginResults.getString("ers_password");
@@ -37,12 +37,12 @@ public class PGDaoClass implements PostgreDaoInterface {
 					String LN = EmpLoginResults.getString("user_last_name");
 					String Email = EmpLoginResults.getString("user_email");
 					int RoleID = EmpLoginResults.getInt("user_role_id");
-					User = Optional.of(new LoginEntity(UserName,dbPW,FN,LN,Email,RoleID));
-					User.ifPresent(AddedClass::add);
-					
-	
-						
-				}
+					User.setFirstName(FN);
+					User.setLastName(LN);
+					User.seteMail(Email);
+					User.setUsername(UserName);
+					User.setPass(dbPW);
+					}
 				
 				}
 				
@@ -57,13 +57,13 @@ public class PGDaoClass implements PostgreDaoInterface {
 			
 			
 		});
-		return AddedClass;
+		return User;
 		
 		
 	}
 
 	@Override
-	public Collection <LoginEntity> PostAdminLogin(String UserID, String PW) {
+	public ArrayList <LoginEntity> PostAdminLogin(String UserID, String PW) {
 		// TODO Auto-generated method stub
 		return null;
 	}

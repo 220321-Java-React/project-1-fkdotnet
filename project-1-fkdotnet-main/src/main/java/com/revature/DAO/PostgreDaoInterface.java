@@ -8,8 +8,8 @@ import com.google.gson.Gson;
 import com.revature.repository.entities.LoginEntity;
 
 public interface PostgreDaoInterface {
-	Collection <LoginEntity> PostEmpLogin(String UserID,String PW);
-	Collection <LoginEntity> PostAdminLogin(String UserID,String PW);
+	LoginEntity PostEmpLogin(String UserID,String PW);
+	ArrayList <LoginEntity> PostAdminLogin(String UserID,String PW);
 	
 	ArrayList <LoginEntity> GetAllEmployees();
 	Optional<Integer> PostAddReimbursementRequest();

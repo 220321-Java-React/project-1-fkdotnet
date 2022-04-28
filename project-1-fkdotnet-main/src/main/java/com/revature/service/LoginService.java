@@ -1,26 +1,24 @@
-/*package com.revature.service;
+package com.revature.service;
 
 import com.revature.repository.LoginRepository;
+import com.revature.repository.entities.LoginEntity;
 
+import java.util.ArrayList;
+
+import com.revature.DAO.*;
 public class LoginService {
-	// I will be hard coding in the Username and Password
-	// You will need to implement the DB aspect using your JDBC and Repo
+	PGDaoClass LDao = new PGDaoClass();
 	
-	// We use the Service to implement business logic
-	// This includes any processing, validation, reformatting
-	
-	private LoginRepository loginRepository;
-	
-	public LoginService() {
-		this.loginRepository = new LoginRepository();
-	}
-	
-	public boolean loginValidation(String username, String password) {
-		if(loginRepository.getLogin(username).getPass().equals(password)) {
-			return true;
-		}else {
-			return false;
+	LoginEntity ReturnedUser = new LoginEntity();
+	public LoginEntity Login(String username,String password) {
+		ReturnedUser = LDao.PostEmpLogin(username, password);
+		if(ReturnedUser.getUsername().equals(username)) {
+			
+			return ReturnedUser;
 		}
-	}
+		else {ReturnedUser = null;}
+	
+	
+		return ReturnedUser;
 }
-*/
+}

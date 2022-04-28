@@ -26,9 +26,9 @@ public class LoginEntity {
 			Roleid = roleid;
 		}
 
-		public LoginEntity(int login_id, String username, String pass) {
+		public LoginEntity( String username, String pass) {
 			super();
-			this.login_id = login_id;
+			
 			this.username = username;
 			this.pass = pass;
 		}
