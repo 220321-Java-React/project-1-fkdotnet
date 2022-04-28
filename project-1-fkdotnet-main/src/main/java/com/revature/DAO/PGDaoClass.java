@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.revature.repository.entities.LoginEntity;
+import com.revature.repository.entities.Reimbursement;
 
 public class PGDaoClass implements PostgreDaoInterface {
 
@@ -51,7 +52,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				}
 				
 		} catch(SQLException ex) {
-			
+			ex.printStackTrace();
 		}
 	
 		
@@ -67,31 +68,62 @@ public class PGDaoClass implements PostgreDaoInterface {
 	}
 
 	@Override
-	public ArrayList <LoginEntity> PostAdminLogin(String UserID, String PW) {
+	public LoginEntity PostAdminLogin(String UserID, String PW) {
+		
+		LoginEntity User = new LoginEntity();
+		 Connection conn = ConnectionFactory.getConnection();
+		 String AdminLoginSQL = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ? AND user_role_id = 2";
+			PreparedStatement EMPLoginStmt;
+			try {
+				EMPLoginStmt = conn.prepareStatement(AdminLoginSQL);
+				EMPLoginStmt.setString(1, UserID);
+				EMPLoginStmt.setString(2, PW);
+				ResultSet EmpLoginResults = EMPLoginStmt.executeQuery();
+				
+				while(EmpLoginResults.next()) {
+					System.out.println("in the loop");
+					int UID = EmpLoginResults.getInt("ers_users_id");
+					String UserName = EmpLoginResults.getString("ers_username");
+					String dbPW = EmpLoginResults.getString("ers_password");
+					String FN = EmpLoginResults.getString("user_first_name");
+					String LN = EmpLoginResults.getString("user_last_name");
+					String Email = EmpLoginResults.getString("user_email");
+					int RoleID = EmpLoginResults.getInt("user_role_id");
+					User.setFirstName(FN);
+					User.setLastName(LN);
+					User.seteMail(Email);
+					User.setUsername(UserName);
+					User.setPass(dbPW);
+					System.out.println(User.toString());
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} { 
+					}
+				return User;
+	}
+	
+	@Override
+	public ArrayList <LoginEntity> GetAllEmployees() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<LoginEntity> GetAllEmployees() {
+	public Reimbursement PostAddReimbursementRequest() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Optional<Integer> PostAddReimbursementRequest() {
+	public ArrayList<Reimbursement> GetReimbursements() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Gson> GetReimbursements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getPendingReimbursements() {
+	public ArrayList<Reimbursement> getPendingReimbursements() {
 		// TODO Auto-generated method stub
 		return null;
 	}
