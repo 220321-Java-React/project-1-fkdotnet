@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.google.gson.Gson;
 import com.revature.DAO.PGDaoClass;
 import com.revature.repository.entities.LoginEntity;
@@ -12,7 +14,7 @@ import com.revature.service.UserLoginService;
 import io.javalin.http.Handler;
 
 public class LoginController {
-
+static HttpSession ses;
 
 
 public static Handler EmployeeLoginHandler = (ctx) -> { 
@@ -22,7 +24,7 @@ public static Handler EmployeeLoginHandler = (ctx) -> {
 	UserLoginService LS = new UserLoginService();
 
 	if(LS.employeeLogin(LDTO.getUsername(),LDTO.getPass()) != null) {
-		ctx.req.getSession();
+		ses = ctx.req.getSession();
 		ctx.status(202);
 		
 		String employeeJSON = gson.toJson(LS.employeeLogin(LDTO.getUsername(), LDTO.getPass()));
@@ -47,7 +49,7 @@ public static Handler AdminLoginHandler = (ctx) -> {
 	UserLoginService LS = new UserLoginService();
 	
 	if(LS.AdminLogin(LDTO.getUsername(),LDTO.getPass()) != null) {
-		ctx.req.getSession();
+		ses = ctx.req.getSession();
 		ctx.status(202);
 		
 		String employeeJSON = gson.toJson(LS.AdminLogin(LDTO.getUsername(), LDTO.getPass()));

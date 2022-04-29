@@ -2,6 +2,7 @@ package com.revature;
 
 
 import com.revature.controllers.LoginController;
+import com.revature.controllers.ReimbursementController;
 
 import io.javalin.Javalin;
 import com.revature.service.*;
@@ -19,6 +20,6 @@ public class Launcher {
     	
     	App.post(PATH.LOGINJS, LoginController.EmployeeLoginHandler);
     	App.post(PATH.ADMINLOGIN, LoginController.AdminLoginHandler);
-    	App.post(PATH.SUBMITREIMBURSEMENTS, null)
+    	App.post(PATH.GETREIMBURSEMENTS, ReimbursementController.GetAllReimbursementsHandler);
     	}
     	}
