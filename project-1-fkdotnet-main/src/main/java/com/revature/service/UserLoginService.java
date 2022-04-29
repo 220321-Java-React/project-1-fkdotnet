@@ -24,7 +24,7 @@ public class UserLoginService {
 		
 }
 	public LoginEntity AdminLogin(String username, String password) {
-		ReturnedUser = LDao.PostEmpLogin(username, password);
+		ReturnedUser = LDao.PostAdminLogin(username, password);
 		String ReturnedPW = ReturnedUser.getPass();
 		if(ReturnedPW!=null && ReturnedPW.equals(password)) {
 			System.out.println("Login Succeeded!");

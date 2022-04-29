@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import com.google.gson.Gson;
 import com.revature.repository.entities.LoginEntity;
-import com.revature.repository.entities.Reimbursement;
+import com.revature.repository.entities.ReimbursementEntity;
 
 public class PGDaoClass implements PostgreDaoInterface {
 
@@ -111,19 +111,19 @@ public class PGDaoClass implements PostgreDaoInterface {
 	}
 
 	@Override
-	public Reimbursement PostAddReimbursementRequest() {
+	public ReimbursementEntity PostAddReimbursementRequest() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Reimbursement> GetReimbursements() {
+	public ArrayList<ReimbursementEntity> GetReimbursements() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Reimbursement> getPendingReimbursements() {
+	public ArrayList<ReimbursementEntity> getPendingReimbursements() {
 		// TODO Auto-generated method stub
 		return null;
 	}

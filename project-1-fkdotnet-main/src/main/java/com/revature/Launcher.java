@@ -18,7 +18,7 @@ public class Launcher {
     	}).start(9898);
     	
     	App.post(PATH.LOGINJS, LoginController.EmployeeLoginHandler);
-    	App.post(PATH.ADMINLOGIN,)
-    	
+    	App.post(PATH.ADMINLOGIN, LoginController.AdminLoginHandler);
+    	App.post(PATH.SUBMITREIMBURSEMENTS, null)
     	}
     	}
