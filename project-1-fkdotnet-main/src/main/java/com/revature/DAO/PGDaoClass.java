@@ -124,40 +124,36 @@ public class PGDaoClass implements PostgreDaoInterface {
 	String GetAllReimbursementsSQL = "select * from ers_reimbursement;";
 	ArrayList <ReimbursementEntity> ReimbursementTable = new ArrayList<>();
 	
-	try {
+	
 		Connection conn = ConnectionFactory.getConnection();
-	  Statement GetAllReimbStatement = conn.createStatement();
+	  
+	try {
+		Statement GetAllReimbStatement = conn.createStatement();
 		ResultSet GetAllReimbResults = GetAllReimbStatement.executeQuery(GetAllReimbursementsSQL);
+		while(GetAllReimbResults.next()){
+		System.out.println("in the loop");
 		
-
-		while(GetAllReimbResults.next()) {
-			
-
-			System.out.println("in the loop");
-			
-			int ID = GetAllReimbResults.getInt("reimb_id");
-			float AMT = GetAllReimbResults.getFloat("reimb_amount");
-			int authorid = GetAllReimbResults.getInt("reimb_author");
-			String Dsc = GetAllReimbResults.getString("reimb_descripition");
-			LocalDateTime ResTimeStamp = GetAllReimbResults.getObject("reimb_resolved",LocalDateTime.class);
-			int ResolverID = GetAllReimbResults.getInt("reimb_resolver");
-			int statusID = GetAllReimbResults.getInt("reimb_status_id");
-			LocalDateTime SubTimeStamp =  GetAllReimbResults.getObject("reimb_submitted",LocalDateTime.class);
-			int typeID = GetAllReimbResults.getInt("reimb_type_id");
-			ReimbursementEntity Reimbursement = new ReimbursementEntity(ID,statusID,typeID,AMT,authorid,ResolverID,Dsc,SubTimeStamp,ResTimeStamp);
-			System.out.println(ID + "" + AMT + "" + authorid);
-			System.out.println(Reimbursement.toString());
-			ReimbursementTable.add(Reimbursement);
-			return ReimbursementTable;
+		int ID = GetAllReimbResults.getInt("reimb_id");
+		float AMT = GetAllReimbResults.getFloat("reimb_amount");
+		int authorid = GetAllReimbResults.getInt("reimb_author");
+		String Dsc = GetAllReimbResults.getString("reimb_description");
+		LocalDateTime ResTimeStamp = GetAllReimbResults.getObject("reimb_resolved",LocalDateTime.class);
+		int ResolverID = GetAllReimbResults.getInt("reimb_resolver");
+		int statusID = GetAllReimbResults.getInt("reimb_status_id");
+		LocalDateTime SubTimeStamp =  GetAllReimbResults.getObject("reimb_submitted",LocalDateTime.class);
+		int typeID = GetAllReimbResults.getInt("reimb_type_id");
+		ReimbursementEntity Reimbursement = new ReimbursementEntity(ID,statusID,typeID,AMT,authorid,ResolverID,Dsc,SubTimeStamp,ResTimeStamp);
+		System.out.println(ID + "" + AMT + "" + authorid);
+		System.out.println(Reimbursement.toString());
+		ReimbursementTable.add(Reimbursement);
+		
 		}
-
-		
-	}
-	catch(SQLException ex) {
-		
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	return ReimbursementTable;
-		
+				
 		
 		
 		

@@ -4,94 +4,112 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ReimbursementEntity {
-	private int id;
-	private int status_id;
-	private int type_id;
-	private float amount;
-	private int author;
-	private int resolver;
-	private String description;
-	private LocalDateTime submitted;
-	private LocalDateTime resolved;
+	private int reimb_id;
+	private int reimb_status_id;
+	private int reimb_type_id;
+	private float reimb_amount;
+	private int reimb_author;
+	private int reimb_resolver;
+	private String reimb_description;
+	private LocalDateTime reimb_submitted;
+	private LocalDateTime reimb_resolved;
 	@Override
 	public String toString() {
-		return "ReimbursementEntity [id=" + id + ", status_id=" + status_id + ", type_id=" + type_id + ", amount="
-				+ amount + ", author=" + author + ", resolver=" + resolver + ", description=" + description
-				+ ", submitted=" + submitted + ", resolved=" + resolved + "]";
+		return "ReimbursementEntity [reimb_id=" + reimb_id + ", reimb_status_id=" + reimb_status_id + ", reimb_type_id="
+				+ reimb_type_id + ", reimb_amount=" + reimb_amount + ", reimb_author=" + reimb_author
+				+ ", reimb_resolver=" + reimb_resolver + ", reimb_description=" + reimb_description
+				+ ", reimb_submitted=" + reimb_submitted + ", reimb_resolved=" + reimb_resolved + "]";
 	}
-	public int getId() {
-		return id;
+	@Override
+	public int hashCode() {
+		return Objects.hash(reimb_amount, reimb_author, reimb_description, reimb_id, reimb_resolved, reimb_resolver,
+				reimb_status_id, reimb_submitted, reimb_type_id);
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getStatus_id() {
-		return status_id;
-	}
-	public void setStatus_id(int status_id) {
-		this.status_id = status_id;
-	}
-	public int getType_id() {
-		return type_id;
-	}
-	public void setType_id(int type_id) {
-		this.type_id = type_id;
-	}
-	public float getAmount() {
-		return amount;
-	}
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
-	public int getAuthor() {
-		return author;
-	}
-	public void setAuthor(int author) {
-		this.author = author;
-	}
-	public int getResolver() {
-		return resolver;
-	}
-	public void setResolver(int resolver) {
-		this.resolver = resolver;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public LocalDateTime getSubmitted() {
-		return submitted;
-	}
-	public void setSubmitted(LocalDateTime submitted) {
-		this.submitted = submitted;
-	}
-	public LocalDateTime getResolved() {
-		return resolved;
-	}
-	public void setResolved(LocalDateTime resolved) {
-		this.resolved = resolved;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReimbursementEntity other = (ReimbursementEntity) obj;
+		return Float.floatToIntBits(reimb_amount) == Float.floatToIntBits(other.reimb_amount)
+				&& reimb_author == other.reimb_author && Objects.equals(reimb_description, other.reimb_description)
+				&& reimb_id == other.reimb_id && Objects.equals(reimb_resolved, other.reimb_resolved)
+				&& reimb_resolver == other.reimb_resolver && reimb_status_id == other.reimb_status_id
+				&& Objects.equals(reimb_submitted, other.reimb_submitted) && reimb_type_id == other.reimb_type_id;
 	}
 	public ReimbursementEntity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public ReimbursementEntity(int id, int status_id, int type_id, float amount, int author, int resolver,
-			String description, LocalDateTime submitted, LocalDateTime resolved) {
+	public ReimbursementEntity(int reimb_id, int reimb_status_id, int reimb_type_id, float reimb_amount,
+			int reimb_author, int reimb_resolver, String reimb_description, LocalDateTime reimb_submitted,
+			LocalDateTime reimb_resolved) {
 		super();
-		this.id = id;
-		this.status_id = status_id;
-		this.type_id = type_id;
-		this.amount = amount;
-		this.author = author;
-		this.resolver = resolver;
-		this.description = description;
-		this.submitted = submitted;
-		this.resolved = resolved;
+		this.reimb_id = reimb_id;
+		this.reimb_status_id = reimb_status_id;
+		this.reimb_type_id = reimb_type_id;
+		this.reimb_amount = reimb_amount;
+		this.reimb_author = reimb_author;
+		this.reimb_resolver = reimb_resolver;
+		this.reimb_description = reimb_description;
+		this.reimb_submitted = reimb_submitted;
+		this.reimb_resolved = reimb_resolved;
 	}
-	
-	
-	
+	public int getReimb_id() {
+		return reimb_id;
+	}
+	public void setReimb_id(int reimb_id) {
+		this.reimb_id = reimb_id;
+	}
+	public int getReimb_status_id() {
+		return reimb_status_id;
+	}
+	public void setReimb_status_id(int reimb_status_id) {
+		this.reimb_status_id = reimb_status_id;
+	}
+	public int getReimb_type_id() {
+		return reimb_type_id;
+	}
+	public void setReimb_type_id(int reimb_type_id) {
+		this.reimb_type_id = reimb_type_id;
+	}
+	public float getReimb_amount() {
+		return reimb_amount;
+	}
+	public void setReimb_amount(float reimb_amount) {
+		this.reimb_amount = reimb_amount;
+	}
+	public int getReimb_author() {
+		return reimb_author;
+	}
+	public void setReimb_author(int reimb_author) {
+		this.reimb_author = reimb_author;
+	}
+	public int getReimb_resolver() {
+		return reimb_resolver;
+	}
+	public void setReimb_resolver(int reimb_resolver) {
+		this.reimb_resolver = reimb_resolver;
+	}
+	public String getReimb_description() {
+		return reimb_description;
+	}
+	public void setReimb_description(String reimb_description) {
+		this.reimb_description = reimb_description;
+	}
+	public LocalDateTime getReimb_submitted() {
+		return reimb_submitted;
+	}
+	public void setReimb_submitted(LocalDateTime reimb_submitted) {
+		this.reimb_submitted = reimb_submitted;
+	}
+	public LocalDateTime getReimb_resolved() {
+		return reimb_resolved;
+	}
+	public void setReimb_resolved(LocalDateTime reimb_resolved) {
+		this.reimb_resolved = reimb_resolved;
+	}
 	
 }
