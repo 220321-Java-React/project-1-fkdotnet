@@ -120,32 +120,35 @@ public class PGDaoClass implements PostgreDaoInterface {
 
 	@Override
 	public ArrayList <ReimbursementEntity> GetReimbursements() {
-	Connection conn = ConnectionFactory.getConnection();
-	String GetAllReimbursementsSQL = "SELECT * FROM ers_reimbursement";
-	ArrayList <ReimbursementEntity> ReimbursementTable = new ArrayList<ReimbursementEntity>();
-	Statement GetAllReimbStatement;
+	
+	String GetAllReimbursementsSQL = "select * from ers_reimbursement;";
+	ArrayList <ReimbursementEntity> ReimbursementTable = new ArrayList<>();
 	
 	try {
-		GetAllReimbStatement = conn.createStatement();
+		Connection conn = ConnectionFactory.getConnection();
+	  Statement GetAllReimbStatement = conn.createStatement();
 		ResultSet GetAllReimbResults = GetAllReimbStatement.executeQuery(GetAllReimbursementsSQL);
 		
+
 		while(GetAllReimbResults.next()) {
 			
 
 			System.out.println("in the loop");
-			ReimbursementEntity Reimbursement = new ReimbursementEntity();
-			Reimbursement.setReimbursementID(GetAllReimbResults.getInt("reimb_id"));
-			Reimbursement.setReimbursementAmount(GetAllReimbResults.getFloat("reimb_amount"));
-			Reimbursement.setReimbursementAuthor(GetAllReimbResults.getInt("reimb_author"));
-			Reimbursement.setReimbursementDescription(GetAllReimbResults.getString("reimb_descripition"));
-			Reimbursement.setReimbursementResolvedTimestamp(GetAllReimbResults.getObject("reimb_resolved",LocalDateTime.class));
-			Reimbursement.setReimbursementResolver(GetAllReimbResults.getInt("reimb_resolver"));
-			Reimbursement.setReimbursementStatus(GetAllReimbResults.getInt("reimb_status_id"));
-			Reimbursement.setReimbursementSubmittedTimestamp(GetAllReimbResults.getObject("reimb_submitted",LocalDateTime.class));
-			Reimbursement.setReimbursementResolver(GetAllReimbResults.getInt("reimb_resolver"));
-			Reimbursement.setReimbursementType(GetAllReimbResults.getInt("reimb_type_id"));
+			
+			int ID = GetAllReimbResults.getInt("reimb_id");
+			float AMT = GetAllReimbResults.getFloat("reimb_amount");
+			int authorid = GetAllReimbResults.getInt("reimb_author");
+			String Dsc = GetAllReimbResults.getString("reimb_descripition");
+			LocalDateTime ResTimeStamp = GetAllReimbResults.getObject("reimb_resolved",LocalDateTime.class);
+			int ResolverID = GetAllReimbResults.getInt("reimb_resolver");
+			int statusID = GetAllReimbResults.getInt("reimb_status_id");
+			LocalDateTime SubTimeStamp =  GetAllReimbResults.getObject("reimb_submitted",LocalDateTime.class);
+			int typeID = GetAllReimbResults.getInt("reimb_type_id");
+			ReimbursementEntity Reimbursement = new ReimbursementEntity(ID,statusID,typeID,AMT,authorid,ResolverID,Dsc,SubTimeStamp,ResTimeStamp);
+			System.out.println(ID + "" + AMT + "" + authorid);
 			System.out.println(Reimbursement.toString());
 			ReimbursementTable.add(Reimbursement);
+			return ReimbursementTable;
 		}
 
 		

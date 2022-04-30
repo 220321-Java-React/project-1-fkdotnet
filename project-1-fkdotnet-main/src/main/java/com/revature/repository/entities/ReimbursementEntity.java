@@ -4,122 +4,94 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ReimbursementEntity {
-	private int ReimbursementID;
-	private int ReimbursementStatus;
-	private int ReimbursementType;
-	private float ReimbursementAmount;
-	private int ReimbursementAuthor;
-	private int ReimbursementResolver;
-	private String ReimbursementDescription;
-	private LocalDateTime ReimbursementSubmittedTimestamp;
-	private LocalDateTime ReimbursementResolvedTimestamp;
-	
-	public ReimbursementEntity() {
-		
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(ReimbursementAmount, ReimbursementAuthor, ReimbursementDescription, ReimbursementID,
-				ReimbursementResolvedTimestamp, ReimbursementResolver, ReimbursementStatus,
-				ReimbursementSubmittedTimestamp, ReimbursementType);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ReimbursementEntity other = (ReimbursementEntity) obj;
-		return Float.floatToIntBits(ReimbursementAmount) == Float.floatToIntBits(other.ReimbursementAmount)
-				&& ReimbursementAuthor == other.ReimbursementAuthor
-				&& Objects.equals(ReimbursementDescription, other.ReimbursementDescription)
-				&& ReimbursementID == other.ReimbursementID
-				&& Objects.equals(ReimbursementResolvedTimestamp, other.ReimbursementResolvedTimestamp)
-				&& ReimbursementResolver == other.ReimbursementResolver
-				&& ReimbursementStatus == other.ReimbursementStatus
-				&& Objects.equals(ReimbursementSubmittedTimestamp, other.ReimbursementSubmittedTimestamp)
-				&& ReimbursementType == other.ReimbursementType;
-	}
-	public ReimbursementEntity(int reimbursementID, int reimbursementStatus, int reimbursementType,
-			float reimbursementAmount, int reimbursementAuthor, int reimbursementResolver,
-			String reimbursementDescription, LocalDateTime reimbursementSubmittedTimestamp,
-			LocalDateTime reimbursementResolvedTimestamp) {
-		super();
-		ReimbursementID = reimbursementID;
-		ReimbursementStatus = reimbursementStatus;
-		ReimbursementType = reimbursementType;
-		ReimbursementAmount = reimbursementAmount;
-		ReimbursementAuthor = reimbursementAuthor;
-		ReimbursementResolver = reimbursementResolver;
-		ReimbursementDescription = reimbursementDescription;
-		ReimbursementSubmittedTimestamp = reimbursementSubmittedTimestamp;
-		ReimbursementResolvedTimestamp = reimbursementResolvedTimestamp;
-	}
+	private int id;
+	private int status_id;
+	private int type_id;
+	private float amount;
+	private int author;
+	private int resolver;
+	private String description;
+	private LocalDateTime submitted;
+	private LocalDateTime resolved;
 	@Override
 	public String toString() {
-		return "ReimbursementEntity [ReimbursementID=" + ReimbursementID + ", ReimbursementStatus="
-				+ ReimbursementStatus + ", ReimbursementType=" + ReimbursementType + ", ReimbursementAmount="
-				+ ReimbursementAmount + ", ReimbursementAuthor=" + ReimbursementAuthor + ", ReimbursementResolver="
-				+ ReimbursementResolver + ", ReimbursementDescription=" + ReimbursementDescription
-				+ ", ReimbursementSubmittedTimestamp=" + ReimbursementSubmittedTimestamp
-				+ ", ReimbursementResolvedTimestamp=" + ReimbursementResolvedTimestamp + "]";
+		return "ReimbursementEntity [id=" + id + ", status_id=" + status_id + ", type_id=" + type_id + ", amount="
+				+ amount + ", author=" + author + ", resolver=" + resolver + ", description=" + description
+				+ ", submitted=" + submitted + ", resolved=" + resolved + "]";
 	}
-	public int getReimbursementID() {
-		return ReimbursementID;
+	public int getId() {
+		return id;
 	}
-	public void setReimbursementID(int reimbursementID) {
-		ReimbursementID = reimbursementID;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getReimbursementStatus() {
-		return ReimbursementStatus;
+	public int getStatus_id() {
+		return status_id;
 	}
-	public void setReimbursementStatus(int reimbursementStatus) {
-		ReimbursementStatus = reimbursementStatus;
+	public void setStatus_id(int status_id) {
+		this.status_id = status_id;
 	}
-	public int getReimbursementType() {
-		return ReimbursementType;
+	public int getType_id() {
+		return type_id;
 	}
-	public void setReimbursementType(int reimbursementType) {
-		ReimbursementType = reimbursementType;
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
 	}
-	public float getReimbursementAmount() {
-		return ReimbursementAmount;
+	public float getAmount() {
+		return amount;
 	}
-	public void setReimbursementAmount(float reimbursementAmount) {
-		ReimbursementAmount = reimbursementAmount;
+	public void setAmount(float amount) {
+		this.amount = amount;
 	}
-	public int getReimbursementAuthor() {
-		return ReimbursementAuthor;
+	public int getAuthor() {
+		return author;
 	}
-	public void setReimbursementAuthor(int reimbursementAuthor) {
-		ReimbursementAuthor = reimbursementAuthor;
+	public void setAuthor(int author) {
+		this.author = author;
 	}
-	public int getReimbursementResolver() {
-		return ReimbursementResolver;
+	public int getResolver() {
+		return resolver;
 	}
-	public void setReimbursementResolver(int reimbursementResolver) {
-		ReimbursementResolver = reimbursementResolver;
+	public void setResolver(int resolver) {
+		this.resolver = resolver;
 	}
-	public String getReimbursementDescription() {
-		return ReimbursementDescription;
+	public String getDescription() {
+		return description;
 	}
-	public void setReimbursementDescription(String reimbursementDescription) {
-		ReimbursementDescription = reimbursementDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public LocalDateTime getReimbursementSubmittedTimestamp() {
-		return ReimbursementSubmittedTimestamp;
+	public LocalDateTime getSubmitted() {
+		return submitted;
 	}
-	public void setReimbursementSubmittedTimestamp(LocalDateTime reimbursementSubmittedTimestamp) {
-		ReimbursementSubmittedTimestamp = reimbursementSubmittedTimestamp;
+	public void setSubmitted(LocalDateTime submitted) {
+		this.submitted = submitted;
 	}
-	public LocalDateTime getReimbursementResolvedTimestamp() {
-		return ReimbursementResolvedTimestamp;
+	public LocalDateTime getResolved() {
+		return resolved;
 	}
-	public void setReimbursementResolvedTimestamp(LocalDateTime reimbursementResolvedTimestamp) {
-		ReimbursementResolvedTimestamp = reimbursementResolvedTimestamp;
+	public void setResolved(LocalDateTime resolved) {
+		this.resolved = resolved;
 	}
-
-
+	public ReimbursementEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public ReimbursementEntity(int id, int status_id, int type_id, float amount, int author, int resolver,
+			String description, LocalDateTime submitted, LocalDateTime resolved) {
+		super();
+		this.id = id;
+		this.status_id = status_id;
+		this.type_id = type_id;
+		this.amount = amount;
+		this.author = author;
+		this.resolver = resolver;
+		this.description = description;
+		this.submitted = submitted;
+		this.resolved = resolved;
+	}
+	
+	
+	
+	
 }
