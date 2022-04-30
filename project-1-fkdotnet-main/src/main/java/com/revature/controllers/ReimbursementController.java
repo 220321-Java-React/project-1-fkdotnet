@@ -26,15 +26,16 @@ public class ReimbursementController {
 	
 	public static Handler GetAllReimbursementsHandler = (ctx) -> {
 		ReimbursementService RS = new ReimbursementService();
-		if(LoginController.ses!=null) {
+		
 			ArrayList <ReimbursementEntity> ReimbursementTable = RS.GetAllReimbursements();
 			Gson gson = new Gson();
 		String TableJson =	gson.toJson(ReimbursementTable);
 			ctx.result(TableJson);
+			System.out.println("context reached"+TableJson);
 			ctx.status(200);
-		}else{
-				ctx.status(400);
-				}
+	
+
+				
 			
 		};
 		

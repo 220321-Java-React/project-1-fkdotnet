@@ -1,6 +1,7 @@
 package com.revature;
 
 
+import com.revature.DAO.PGDaoClass;
 import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
 
@@ -11,7 +12,7 @@ public class Launcher {
 
     public static void main(String[] args) {
     
-    	Javalin App = Javalin.create(config -> {
+    Javalin App = Javalin.create(config -> {
     		config.enableCorsForAllOrigins();
     	
     		
@@ -20,6 +21,6 @@ public class Launcher {
     	
     	App.post(PATH.LOGINJS, LoginController.EmployeeLoginHandler);
     	App.post(PATH.ADMINLOGIN, LoginController.AdminLoginHandler);
-    	App.post(PATH.GETREIMBURSEMENTS, ReimbursementController.GetAllReimbursementsHandler);
-    	}
-    	}
+    	App.get(PATH.GETREIMBURSEMENTS, ReimbursementController.GetAllReimbursementsHandler);
+    ;	}
+}

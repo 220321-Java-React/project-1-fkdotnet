@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -121,34 +122,38 @@ public class PGDaoClass implements PostgreDaoInterface {
 	public ArrayList <ReimbursementEntity> GetReimbursements() {
 	Connection conn = ConnectionFactory.getConnection();
 	String GetAllReimbursementsSQL = "SELECT * FROM ers_reimbursement";
-	ArrayList<ReimbursementEntity> ReimbursementTable = new ArrayList<>();
-	PreparedStatement GetAllReimbStatement;
+	ArrayList <ReimbursementEntity> ReimbursementTable = new ArrayList<ReimbursementEntity>();
+	Statement GetAllReimbStatement;
 	
 	try {
-		GetAllReimbStatement = conn.prepareStatement(GetAllReimbursementsSQL);
-		ResultSet GetAllReimbResults = GetAllReimbStatement.executeQuery();
+		GetAllReimbStatement = conn.createStatement();
+		ResultSet GetAllReimbResults = GetAllReimbStatement.executeQuery(GetAllReimbursementsSQL);
 		
 		while(GetAllReimbResults.next()) {
-			ReimbursementEntity Reimbursement = new ReimbursementEntity();
+			
 
 			System.out.println("in the loop");
+			ReimbursementEntity Reimbursement = new ReimbursementEntity();
 			Reimbursement.setReimbursementID(GetAllReimbResults.getInt("reimb_id"));
 			Reimbursement.setReimbursementAmount(GetAllReimbResults.getFloat("reimb_amount"));
 			Reimbursement.setReimbursementAuthor(GetAllReimbResults.getInt("reimb_author"));
 			Reimbursement.setReimbursementDescription(GetAllReimbResults.getString("reimb_descripition"));
-			Reimbursement.setReimbursementResolvedTimestamp((LocalDateTime) GetAllReimbResults.getObject("reimb_resolved"));
-			Reimbursement.setReimbursementResolver(0);
-			Reimbursement.setReimbursementStatus(0);
-			Reimbursement.setReimbursementSubmittedTimestamp((LocalDateTime) GetAllReimbResults.getObject("reimb_submitted"));
-			Reimbursement.setReimbursementResolver(0);
-			Reimbursement.setReimbursementType(0);
+			Reimbursement.setReimbursementResolvedTimestamp(GetAllReimbResults.getObject("reimb_resolved",LocalDateTime.class));
+			Reimbursement.setReimbursementResolver(GetAllReimbResults.getInt("reimb_resolver"));
+			Reimbursement.setReimbursementStatus(GetAllReimbResults.getInt("reimb_status_id"));
+			Reimbursement.setReimbursementSubmittedTimestamp(GetAllReimbResults.getObject("reimb_submitted",LocalDateTime.class));
+			Reimbursement.setReimbursementResolver(GetAllReimbResults.getInt("reimb_resolver"));
+			Reimbursement.setReimbursementType(GetAllReimbResults.getInt("reimb_type_id"));
+			System.out.println(Reimbursement.toString());
 			ReimbursementTable.add(Reimbursement);
 		}
+
 		
 	}
 	catch(SQLException ex) {
 		
 	}
+	return ReimbursementTable;
 		
 		
 		
@@ -156,7 +161,6 @@ public class PGDaoClass implements PostgreDaoInterface {
 		
 		
 		
-		return null;
 	}
 
 	@Override
