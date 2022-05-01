@@ -29,7 +29,7 @@ public class ReimbursementController {
 
 	
 	public static Handler SubmitReimbursementHandler = (ctx) -> {
-		
+		ReimbursementService RS = new ReimbursementService();
 	
 	
 	
