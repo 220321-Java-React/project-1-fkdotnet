@@ -6,7 +6,7 @@ public class LoginEntity {
 	
 	
 		
-		private int login_id;
+		private int users_id;
 		private String username;
 		private String password;
 		private String firstName;
@@ -16,8 +16,8 @@ public class LoginEntity {
 		private int Roleid;
 		
 		
-		public LoginEntity(String username, String pass, String firstName, String lastName, String eMail, int roleid) {
-			super();
+		public LoginEntity(int users_id,String username, String pass, String firstName, String lastName, String eMail, int roleid) {
+			this.users_id = users_id;
 			this.username = username;
 			this.password = pass;
 			this.firstName = firstName;
@@ -37,12 +37,12 @@ public class LoginEntity {
 			// TODO Auto-generated constructor stub
 		}
 
-		public int getLogin_id() {
-			return login_id;
+		public int getusers_id() {
+			return users_id;
 		}
 
-		public void setLogin_id(int login_id) {
-			this.login_id = login_id;
+		public void setuser_id( int users_id) {
+			this.users_id = users_id;
 		}
 
 		public String getUsername() {
@@ -63,7 +63,7 @@ public class LoginEntity {
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(login_id, password, username);
+			return Objects.hash(users_id, password, username);
 		}
 
 		@Override
@@ -78,13 +78,13 @@ public class LoginEntity {
 				return false;
 			}
 			LoginEntity other = (LoginEntity) obj;
-			return login_id == other.login_id && Objects.equals(password, other.password)
+			return users_id  == other.users_id && Objects.equals(password, other.password)
 					&& Objects.equals(username, other.username);
 		}
 
 		@Override
 		public String toString() {
-			return "LoginEntity [login_id=" + login_id + ", username=" + username + ", pass=" + password + "]";
+			return "LoginEntity [users_id=" +users_id  + ", username=" + username + ", pass=" + password + "]";
 		}
 
 		public String getFirstName() {
