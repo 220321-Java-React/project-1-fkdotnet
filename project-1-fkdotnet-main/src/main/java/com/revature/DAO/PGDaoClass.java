@@ -48,6 +48,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 					User.seteMail(Email);
 					User.setUsername(UserName);
 					User.setPass(dbPW);
+					User.setuser_id(UID);
 					System.out.println(User.toString());
 					}
 				

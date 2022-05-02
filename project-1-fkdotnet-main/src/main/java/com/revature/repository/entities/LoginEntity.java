@@ -9,8 +9,8 @@ public class LoginEntity {
 		private int users_id;
 		private String username;
 		private String password;
-		private String firstName;
-		private String lastName;
+		private String firstname;
+		private String lastname;
 		private String eMail;
 		private String Role;
 		private int Roleid;
@@ -20,10 +20,10 @@ public class LoginEntity {
 			this.users_id = users_id;
 			this.username = username;
 			this.password = pass;
-			this.firstName = firstName;
-			this.lastName = lastName;
+			this.firstname = firstName;
+			this.lastname = lastName;
 			this.eMail = eMail;
-			Roleid = roleid;
+			this.Roleid = roleid;
 		}
 
 		public LoginEntity( String username, String pass) {
@@ -88,19 +88,19 @@ public class LoginEntity {
 		}
 
 		public String getFirstName() {
-			return firstName;
+			return firstname;
 		}
 
 		public void setFirstName(String firstName) {
-			this.firstName = firstName;
+			this.firstname = firstName;
 		}
 
 		public String getLastName() {
-			return lastName;
+			return lastname;
 		}
 
 		public void setLastName(String lastName) {
-			this.lastName = lastName;
+			this.lastname = lastName;
 		}
 
 		public String geteMail() {

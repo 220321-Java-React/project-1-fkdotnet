@@ -29,7 +29,8 @@ public class ReimbursementController {
 
 	
 	public static Handler SubmitReimbursementHandler = (ctx) -> {
-		ReimbursementService RS = new ReimbursementService();
+		ctx.result("woo");
+		ctx.status(202);
 	
 	
 	

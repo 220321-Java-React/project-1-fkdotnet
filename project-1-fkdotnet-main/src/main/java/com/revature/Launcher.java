@@ -13,6 +13,7 @@ public class Launcher {
     public static void main(String[] args) {
     
     Javalin App = Javalin.create(config -> {
+    	 	config.sessionHandler(javaserv::fileSessionHandler);
     		config.enableCorsForAllOrigins();
     	
     		
@@ -21,7 +22,7 @@ public class Launcher {
     	
     	App.post(PATH.LOGINJS, LoginController.EmployeeLoginHandler);
     	App.post(PATH.ADMINLOGIN, LoginController.AdminLoginHandler);
-    	
+    	App.get(PATH.USERRENDERGET, LoginController.UserRenderHandler);
     	App.get(PATH.GETREIMBURSEMENTS, ReimbursementController.GetAllReimbursementsHandler);
     	App.post(PATH.SUBMITREIMBURSEMENTS, ReimbursementController.SubmitReimbursementHandler);
     	}
