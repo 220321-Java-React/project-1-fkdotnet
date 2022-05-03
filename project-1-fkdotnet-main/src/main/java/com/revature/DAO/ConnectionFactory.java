@@ -10,16 +10,15 @@ public class ConnectionFactory {
 		
 		
 	
-			final String HOST = "database-1.cbiem97ytw7h.us-east-1.rds.amazonaws.com";
+			final String HOST = "localhost";
 			final String PORT = "5432";
 			final String SQL_UN = "postgres";
 			final String PW = "sdrep2016";
 			final String DB_NAME = "postgres";
-			final String JDBC_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DB_NAME + "?user=" + SQL_UN
-					+ "&password=" + PW;
+			final String JDBC_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" +DB_NAME;
 		
 			try {
-		Connection conn = DriverManager.getConnection(JDBC_URL);
+		Connection conn = DriverManager.getConnection(JDBC_URL,SQL_UN,PW);
 			return conn;
 	}
 			catch (SQLException ex) {

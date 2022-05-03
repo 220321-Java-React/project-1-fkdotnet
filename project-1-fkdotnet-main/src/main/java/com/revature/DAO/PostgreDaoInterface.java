@@ -12,7 +12,7 @@ public interface PostgreDaoInterface {
 	LoginEntity PostEmpLogin(String UserID,String PW);
 	LoginEntity PostAdminLogin(String UserID,String PW);
 	ArrayList <LoginEntity> GetAllEmployees();
-	ReimbursementEntity PostAddReimbursementRequest();
+	Integer PostAddReimbursementRequest(ReimbursementEntity Reimb);
 	ArrayList<ReimbursementEntity> GetReimbursements();
 	ArrayList<ReimbursementEntity> getPendingReimbursements();
 	void ApproveReimbursement(int ReimbursementID);

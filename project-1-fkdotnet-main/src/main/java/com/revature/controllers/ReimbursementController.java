@@ -29,7 +29,9 @@ public class ReimbursementController {
 
 	
 	public static Handler SubmitReimbursementHandler = (ctx) -> {
-		ctx.result("woo");
+		Gson gson = new Gson();
+		String reqJSON = gson.toJson(ctx.body());
+		System.out.println("Request submitted: " +reqJSON);
 		ctx.status(202);
 	
 	

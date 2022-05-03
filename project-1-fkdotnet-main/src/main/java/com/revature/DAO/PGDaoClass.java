@@ -110,16 +110,32 @@ public class PGDaoClass implements PostgreDaoInterface {
 				return User;
 	}
 	
-	@Override
-	public ArrayList <LoginEntity> GetAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
-	public ReimbursementEntity PostAddReimbursementRequest() {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer PostAddReimbursementRequest(ReimbursementEntity Reimb) {
+		Integer Status = null;
+		String SubmitReimbursementSQL = "INSERT INTO ers_reimbursement (reimb_status_id, reimb_type_id, reimb_amount, reimb_author, reimb_description, reimb_submitted)" +
+				" VALUES(?,?,?,?,?,?)";
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		try {
+			PreparedStatement addReimbursement = conn.prepareStatement(SubmitReimbursementSQL);
+			addReimbursement.setInt(1, Reimb.getReimb_status_id());
+			addReimbursement.setInt(2, Reimb.getReimb_type_id());
+			addReimbursement.setFloat(3, Reimb.getReimb_amount());
+			addReimbursement.setInt(4, Reimb.getReimb_author());
+			addReimbursement.setString(5, Reimb.getReimb_description());
+			addReimbursement.setObject(6, Reimb.getReimb_submitted());
+			Status = addReimbursement.executeUpdate();
+			return Status;
+			
+			
+		}catch(SQLException ex) {
+		ex.printStackTrace();
+		}
+			return Status;
 	}
 
 	@Override
@@ -182,6 +198,11 @@ public class PGDaoClass implements PostgreDaoInterface {
 	public void DenyReimbursement(int ReimbursementID) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public ArrayList <LoginEntity> GetAllEmployees() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
