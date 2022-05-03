@@ -1,11 +1,14 @@
 package com.revature.controllers;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.revature.repository.entities.ReimbursementEntity;
+import com.revature.service.LocalDateTimeDeserializer;
+import com.revature.service.LocalDateTimeSerializer;
 import com.revature.service.ReimbursementService;
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -29,11 +32,20 @@ public class ReimbursementController {
 
 	
 	public static Handler SubmitReimbursementHandler = (ctx) -> {
-		Gson gson = new Gson();
-		String reqJSON = gson.toJson(ctx.body());
-		System.out.println("Request submitted: " +reqJSON);
+		ReimbursementService RS = new ReimbursementService();
+		GsonBuilder Bob = new GsonBuilder();
+		Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+		Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+		Bob.serializeNulls();
+		Gson gson = Bob.setPrettyPrinting().create();
+		
+		String SerializedReimb = ctx.body();
+		ReimbursementEntity ReimbRepo = gson.fromJson(SerializedReimb, ReimbursementEntity.class);
+		String SubmittedQuery =	RS.submitReimbursement(ReimbRepo);
+		
+		if(SubmittedQuery != null)
 		ctx.status(202);
-	
+		ctx.result(SubmittedQuery);
 	
 	
 	

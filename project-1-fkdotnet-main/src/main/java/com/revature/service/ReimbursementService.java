@@ -31,4 +31,22 @@ String ReimbursementJSON = gson.toJson(ReimbursementTable);
 		
 
 }
+public String submitReimbursement(ReimbursementEntity Submitted) {
+	ReimbursementEntity ReturnedReimb = RDao.PostAddReimbursementRequest(Submitted);
+	GsonBuilder Bob = new GsonBuilder();
+	Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+	Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+	Bob.serializeNulls();
+	Gson gson = Bob.setPrettyPrinting().create();
+	String ReimbursementAddedJSon = gson.toJson(ReturnedReimb);
+	
+	
+	
+	
+	return ReimbursementAddedJSon;
+	
+}
+
+
+
 }

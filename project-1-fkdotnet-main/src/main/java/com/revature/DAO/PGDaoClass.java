@@ -113,7 +113,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 	
 
 	@Override
-	public Integer PostAddReimbursementRequest(ReimbursementEntity Reimb) {
+	public ReimbursementEntity PostAddReimbursementRequest(ReimbursementEntity Reimb) {
 		Integer Status = null;
 		String SubmitReimbursementSQL = "INSERT INTO ers_reimbursement (reimb_status_id, reimb_type_id, reimb_amount, reimb_author, reimb_description, reimb_submitted)" +
 				" VALUES(?,?,?,?,?,?)";
@@ -129,13 +129,15 @@ public class PGDaoClass implements PostgreDaoInterface {
 			addReimbursement.setString(5, Reimb.getReimb_description());
 			addReimbursement.setObject(6, Reimb.getReimb_submitted());
 			Status = addReimbursement.executeUpdate();
-			return Status;
-			
+			if(Status > 0) {
+			return Reimb;
+			}
+			else{return null;}
 			
 		}catch(SQLException ex) {
 		ex.printStackTrace();
 		}
-			return Status;
+			return Reimb;
 	}
 
 	@Override
