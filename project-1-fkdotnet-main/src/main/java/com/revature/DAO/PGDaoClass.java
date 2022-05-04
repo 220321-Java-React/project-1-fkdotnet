@@ -116,7 +116,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 	public ReimbursementEntity PostAddReimbursementRequest(ReimbursementEntity Reimb) {
 		Integer Status = null;
 		String SubmitReimbursementSQL = "INSERT INTO ers_reimbursement (reimb_status_id, reimb_type_id, reimb_amount, reimb_author, reimb_description, reimb_submitted)" +
-				" VALUES(?,?,?,?,?,?)";
+				" VALUES(?,?,?,?,?,CURRENT_TIMESTAMP)";
 		
 		Connection conn = ConnectionFactory.getConnection();
 		
@@ -127,7 +127,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 			addReimbursement.setFloat(3, Reimb.getReimb_amount());
 			addReimbursement.setInt(4, Reimb.getReimb_author());
 			addReimbursement.setString(5, Reimb.getReimb_description());
-			addReimbursement.setObject(6, Reimb.getReimb_submitted());
+			
 			Status = addReimbursement.executeUpdate();
 			if(Status > 0) {
 			return Reimb;

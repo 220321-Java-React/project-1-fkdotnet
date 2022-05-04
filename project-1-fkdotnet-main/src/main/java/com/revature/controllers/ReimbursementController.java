@@ -35,7 +35,6 @@ public class ReimbursementController {
 		ReimbursementService RS = new ReimbursementService();
 		GsonBuilder Bob = new GsonBuilder();
 		Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
-		Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
 		Bob.serializeNulls();
 		Gson gson = Bob.setPrettyPrinting().create();
 		
