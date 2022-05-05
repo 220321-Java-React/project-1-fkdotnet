@@ -99,6 +99,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 					User.setPass(dbPW);
 					User.setuser_id(UID);
 			
+			
 					
 					System.out.println(User.toString());
 				}

@@ -32,6 +32,7 @@ public class ReimbursementController {
 
 	
 	public static Handler SubmitReimbursementHandler = (ctx) -> {
+		
 		ReimbursementService RS = new ReimbursementService();
 		GsonBuilder Bob = new GsonBuilder();
 		Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
@@ -40,11 +41,13 @@ public class ReimbursementController {
 		
 		String SerializedReimb = ctx.body();
 		ReimbursementEntity ReimbRepo = gson.fromJson(SerializedReimb, ReimbursementEntity.class);
-		String SubmittedQuery =	RS.submitReimbursement(ReimbRepo);
+		RS.submitReimbursement(ReimbRepo);
+		System.out.println(ReimbRepo.toString()+"sent");
+	
 		
-		if(SubmittedQuery != null)
+		
 		ctx.status(202);
-		ctx.result(SubmittedQuery);
+		
 	
 	
 	

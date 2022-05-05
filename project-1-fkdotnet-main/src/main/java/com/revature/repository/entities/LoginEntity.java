@@ -12,8 +12,7 @@ public class LoginEntity {
 		private String firstname;
 		private String lastname;
 		private String eMail;
-		private String Role;
-		private int Roleid;
+		private int user_role_id;
 		
 		
 		public LoginEntity(int users_id,String username, String pass, String firstName, String lastName, String eMail, int roleid) {
@@ -23,7 +22,7 @@ public class LoginEntity {
 			this.firstname = firstName;
 			this.lastname = lastName;
 			this.eMail = eMail;
-			this.Roleid = roleid;
+			this.user_role_id = roleid;
 		}
 
 		public LoginEntity( String username, String pass) {
@@ -82,6 +81,9 @@ public class LoginEntity {
 					&& Objects.equals(username, other.username);
 		}
 
+
+		
+
 		@Override
 		public String toString() {
 			return "LoginEntity [users_id=" +users_id  + ", username=" + username + ", pass=" + password + "]";
@@ -109,6 +111,14 @@ public class LoginEntity {
 
 		public void seteMail(String eMail) {
 			this.eMail = eMail;
+		}
+
+		public int getUser_role_id() {
+			return user_role_id;
+		}
+
+		public void setUser_role_id(int user_role_id) {
+			this.user_role_id = user_role_id;
 		}
 
 		

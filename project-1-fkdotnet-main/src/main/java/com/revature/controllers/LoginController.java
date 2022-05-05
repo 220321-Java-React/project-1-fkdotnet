@@ -36,14 +36,7 @@ public static Handler EmployeeLoginHandler = (ctx) -> {
 
 	if(LS.employeeLogin(LoginRepo.getUsername(),LoginRepo.getPass())!= null) {
 		LoginEntity LDTO = LS.employeeLogin(LoginRepo.getUsername(),LoginRepo.getPass());
-		ctx.sessionAttribute("ers_username",LDTO.getUsername());
-		ctx.sessionAttribute("user_first_name",LDTO.getFirstName());
-		ctx.sessionAttribute("ers_users_id",LDTO.getusers_id());
-		
-		int ersUser = ctx.sessionAttribute("ers_users_id");
-		System.out.println(ersUser);
-		System.out.println(LDTO.toString());
-		
+	
 		ctx.status(202);
 		
 		
@@ -93,11 +86,12 @@ public static Handler AdminLoginHandler = (ctx) -> {
 public static Handler UserRenderHandler = (ctx) -> {
 	Gson gson = new Gson();
 	Map <String, Object> RenderedUser = new HashMap<>(); 
-	RenderedUser.put("ers_user_id",ctx.sessionAttribute("ers_user_id"));
+	RenderedUser.put("ers_users_id",ctx.sessionAttribute("ers_users_id"));
 	RenderedUser.put("user_first_name",ctx.sessionAttribute("user_first_name"));
 	RenderedUser.put("ers_username", ctx.sessionAttribute("ers_username"));
 	
 	String JsonRenderedUser = gson.toJson(RenderedUser);
+	System.out.println(JsonRenderedUser);
 	ctx.result(JsonRenderedUser);
 	
 };
