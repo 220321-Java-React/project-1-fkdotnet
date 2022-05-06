@@ -27,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import io.javalin.http.Handler;
 
 public class ReimbursementController {
-	
+	/// may consider sprinting through a table framework for better looks and functions sunday!
 	public static ArrayList <ReimbursementEntity> ReimbursementTable; 
 
 	
