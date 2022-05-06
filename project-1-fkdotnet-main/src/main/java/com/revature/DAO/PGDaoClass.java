@@ -185,21 +185,47 @@ public class PGDaoClass implements PostgreDaoInterface {
 		
 	}
 
-	@Override
-	public ArrayList<ReimbursementEntity> getPendingReimbursements() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public void ApproveReimbursement(int ReimbursementID) {
-		// TODO Auto-generated method stub
+	public int ApproveReimbursement(int ReimbursementID) {
+		String ApproveSQL = "UPDATE ers_reimbursement SET reimb_status_id = 2 where reimb_id = " + ReimbursementID;
+		Connection conn = ConnectionFactory.getConnection();
+		int status=0;
+		try {
+			Statement ApproveStatement = conn.createStatement();
+			status = ApproveStatement.executeUpdate(ApproveSQL);
+			if(status>0) {
+				return status;
+			}
+			
+		
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		return status;
 		
 	}
 
 	@Override
-	public void DenyReimbursement(int ReimbursementID) {
-		// TODO Auto-generated method stub
+	public int DenyReimbursement(int ReimbursementID) {
+		String DenySQL = "UPDATE ers_reimbursement SET reimb_status_id = 0 where reimb_id = " + ReimbursementID;
+		Connection conn = ConnectionFactory.getConnection();
+		int status=0;
+		try {
+			Statement ApproveStatement = conn.createStatement();
+			status = ApproveStatement.executeUpdate(DenySQL);
+			if(status>0) {
+				return status;
+			}
+			
+		
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		return status;
 		
 	}
 	@Override

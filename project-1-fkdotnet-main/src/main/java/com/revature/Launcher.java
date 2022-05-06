@@ -15,8 +15,7 @@ public class Launcher {
     public static void main(String[] args) {
     
     Javalin App = Javalin.create(config -> {
-    	 	config.sessionHandler(javaserv::fileSessionHandler);
-    		config.enableCorsForAllOrigins();
+    	 	    		config.enableCorsForAllOrigins();
     	
     		
     	
