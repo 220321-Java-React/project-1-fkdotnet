@@ -59,9 +59,9 @@ public class ReimbursementController {
 	
 	public static Handler GetAllReimbursementsHandler = (ctx) -> {
 		ReimbursementService RS = new ReimbursementService();
-		
+		Gson gson = new Gson();
 		String ReimbursementJson = RS.GetAllReimbursements();  
-		
+		gson.toJson(ReimbursementJson);
 			ctx.result(ReimbursementJson);
 			
 			ctx.status(200);

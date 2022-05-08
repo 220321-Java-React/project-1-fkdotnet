@@ -15,7 +15,7 @@ public interface PostgreDaoInterface {
 	ReimbursementEntity PostAddReimbursementRequest(ReimbursementEntity Reimb);
 	ArrayList<ReimbursementEntity> GetReimbursements();
 	
-	int ApproveReimbursement(int ReimbursementID);
-	int DenyReimbursement(int ReimbursementID);
+	int ApproveReimbursement(int ReimbursementID, int ResolverID);
+	int DenyReimbursement(int ReimbursementID, int ResolverID);
 
 }

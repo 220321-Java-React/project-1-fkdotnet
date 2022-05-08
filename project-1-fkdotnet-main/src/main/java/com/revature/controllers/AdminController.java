@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import com.google.gson.Gson;
+import com.revature.repository.ADRepo;
 import com.revature.service.AdminService;
 
 import io.javalin.http.Handler;
@@ -7,42 +9,33 @@ import io.javalin.http.Handler;
 public class AdminController {
 
 	public static Handler ApproveHandler = (ctx) -> {
+		String body = ctx.body();
 		AdminService AS = new AdminService();
-		String ParamString = ctx.body();
-		int paramID = Integer.parseInt(ParamString);
-		int resultin = AS.ApproveService(paramID);
-		if(resultin > 0) {
-			System.out.println("updated!");
-			ctx.status(202);
-			
+		Gson gson = new Gson();
+		ADRepo AD = gson.fromJson(body,ADRepo.class);
+		int result = AS.ApproveService(AD.getReimb_id(), AD.getResolver());
+		if(result > 0)
+		{
+			System.out.println("Reimbursement #" + AD.getReimb_id() + "Approved!");
 		}
-		else {
-			ctx.status(501);}
-		
-		
 	};
 	
 	
 	public static Handler DenyHandler = (ctx) -> {
+		String body = ctx.body();
 		AdminService AS = new AdminService();
-		String ParamString = ctx.body();
-		int paramID = Integer.parseInt(ParamString);
-		int resultin = AS.DenyService(paramID);
-		if(resultin > 0) {
-			System.out.println("updated!");
-			ctx.status(202);
-			
-		}
-		else {
-			ctx.status(501);
+		Gson gson = new Gson();
+		ADRepo AD = gson.fromJson(body,ADRepo.class);
+		int result = AS.DenyService(AD.getReimb_id(),AD.getResolver());
+		if(result > 0)
+		{
+			System.out.println("Reimbursement #" + AD.getReimb_id() + "denied");
 		}
 	};
-	
-
 		
 		
 		
-		
+	};		
 	
 	
 	

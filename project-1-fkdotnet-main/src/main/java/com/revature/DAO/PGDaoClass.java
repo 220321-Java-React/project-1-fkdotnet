@@ -188,8 +188,8 @@ public class PGDaoClass implements PostgreDaoInterface {
 
 
 	@Override
-	public int ApproveReimbursement(int ReimbursementID) {
-		String ApproveSQL = "UPDATE ers_reimbursement SET reimb_status_id = 2 where reimb_id = " + ReimbursementID;
+	public int ApproveReimbursement(int ReimbursementID, int ResolverID) {
+		String ApproveSQL = "UPDATE ers_reimbursement SET reimb_status_id = 2, reimb_resolved = CURRENT_TIMESTAMP() WHERE reimb_id = " + ReimbursementID;
 		Connection conn = ConnectionFactory.getConnection();
 		int status=0;
 		try {
@@ -209,8 +209,8 @@ public class PGDaoClass implements PostgreDaoInterface {
 	}
 
 	@Override
-	public int DenyReimbursement(int ReimbursementID) {
-		String DenySQL = "UPDATE ers_reimbursement SET reimb_status_id = 0 where reimb_id = " + ReimbursementID;
+	public int DenyReimbursement(int ReimbursementID,int ResolverID) {
+		String DenySQL = "UPDATE ers_reimbursement SET reimb_status_id = 0, reimb_resolved = CURRENT_TIMESTAMP() WHERE reimb_id = " + ReimbursementID;
 		Connection conn = ConnectionFactory.getConnection();
 		int status=0;
 		try {

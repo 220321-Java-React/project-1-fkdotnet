@@ -7,7 +7,7 @@ public static final String ADMINLOGIN = "/adminlogin/";
 public static final String GETREIMBURSEMENTS = "/getallreimb/";
 public static final String SUBMITREIMBURSEMENTS = "/submitreimbursement/";
 public static final String USERRENDERGET = "/renderuser/";
-public static final String APPROVE = "";
-public static final String DENY = "";
-public static final String DELETE ="";
+public static final String APPROVE = "/approverequest/";
+public static final String DENY = "/denyrequest/";
+public static final String DELETE ="/deleterow/";
 }
