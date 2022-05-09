@@ -5,10 +5,15 @@ import com.revature.repository.entities.LoginEntity;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.Launcher;
 import com.revature.DAO.*;
 
 public class UserLoginService {
 	PGDaoClass LDao = new PGDaoClass();
+	Logger log = LogManager.getLogger(UserLoginService.class);
 
 	LoginEntity ReturnedUser = new LoginEntity();
 
@@ -17,6 +22,7 @@ public class UserLoginService {
 		String ReturnedPW = ReturnedUser.getPass();
 		if(ReturnedPW!=null && ReturnedPW.equals(password)) {
 			System.out.println("Login Succeeded!");
+			log.info(ReturnedUser +"logged in");
 			return ReturnedUser;
 		}
 		else {ReturnedUser = null;}
@@ -28,6 +34,8 @@ public class UserLoginService {
 		String ReturnedPW = ReturnedUser.getPass();
 		if(ReturnedPW!=null && ReturnedPW.equals(password)) {
 			System.out.println("Login Succeeded!");
+			log.info(ReturnedUser +"logged in");
+
 			return ReturnedUser;
 		}
 		else {ReturnedUser = null;}

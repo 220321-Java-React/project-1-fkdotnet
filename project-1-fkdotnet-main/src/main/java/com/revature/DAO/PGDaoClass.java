@@ -10,12 +10,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.revature.repository.entities.LoginEntity;
 import com.revature.repository.entities.ReimbursementEntity;
+import com.revature.service.UserLoginService;
 
 public class PGDaoClass implements PostgreDaoInterface {
-
+	Logger log = LogManager.getLogger(PGDaoClass.class);
+	
+	
+	
 	@Override
 	public LoginEntity PostEmpLogin(String UserID, String PW) {
 		
@@ -35,7 +42,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				ResultSet EmpLoginResults = EMPLoginStmt.executeQuery();
 				
 				while(EmpLoginResults.next()) {
-					System.out.println("in the loop");
+					log.info("results parsing");
 					int UID = EmpLoginResults.getInt("ers_users_id");
 					String UserName = EmpLoginResults.getString("ers_username");
 					String dbPW = EmpLoginResults.getString("ers_password");
@@ -49,6 +56,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 					User.setUsername(UserName);
 					User.setPass(dbPW);
 					User.setuser_id(UID);
+					User.setUser_role_id(RoleID);
 					System.out.println(User.toString());
 					}
 				
@@ -56,6 +64,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				
 		} catch(SQLException ex) {
 			ex.printStackTrace();
+			log.info("database error at login")
 		}
 	
 		
@@ -84,7 +93,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 				ResultSet EmpLoginResults = EMPLoginStmt.executeQuery();
 				
 				while(EmpLoginResults.next()) {
-					System.out.println("in the loop");
+					log.info("login succeeded");
 					int UID = EmpLoginResults.getInt("ers_users_id");
 					String UserName = EmpLoginResults.getString("ers_username");
 					String dbPW = EmpLoginResults.getString("ers_password");
@@ -98,7 +107,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 					User.setUsername(UserName);
 					User.setPass(dbPW);
 					User.setuser_id(UID);
-			
+					User.setUser_role_id(RoleID);
 			
 					
 					System.out.println(User.toString());
@@ -131,9 +140,11 @@ public class PGDaoClass implements PostgreDaoInterface {
 			
 			Status = addReimbursement.executeUpdate();
 			if(Status > 0) {
-			return Reimb;
+				log.info("reimbursement submitted");
+				return Reimb;
 			}
-			else{return null;}
+			else{log.info("not sent");
+				return null;}
 			
 		}catch(SQLException ex) {
 		ex.printStackTrace();
@@ -154,7 +165,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 		Statement GetAllReimbStatement = conn.createStatement();
 		ResultSet GetAllReimbResults = GetAllReimbStatement.executeQuery(GetAllReimbursementsSQL);
 		while(GetAllReimbResults.next()){
-		System.out.println("in the loop");
+		log.info("reimbursements recvd");
 		
 		int ID = GetAllReimbResults.getInt("reimb_id");
 		float AMT = GetAllReimbResults.getFloat("reimb_amount");
@@ -174,6 +185,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		log.error("SQL error!");
 	}
 	return ReimbursementTable;
 				
@@ -189,13 +201,14 @@ public class PGDaoClass implements PostgreDaoInterface {
 
 	@Override
 	public int ApproveReimbursement(int ReimbursementID, int ResolverID) {
-		String ApproveSQL = "UPDATE ers_reimbursement SET reimb_status_id = 2, reimb_resolved = CURRENT_TIMESTAMP() WHERE reimb_id = " + ReimbursementID;
+		String ApproveSQL = "UPDATE ers_reimbursement SET reimb_status_id = 2, reimb_resolved = CURRENT_TIMESTAMP WHERE reimb_id = " + ReimbursementID+";";
 		Connection conn = ConnectionFactory.getConnection();
 		int status=0;
 		try {
 			Statement ApproveStatement = conn.createStatement();
 			status = ApproveStatement.executeUpdate(ApproveSQL);
 			if(status>0) {
+				log.info("approval sent to db succesfully");
 				return status;
 			}
 			
@@ -203,6 +216,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
+			log.error("sql error on approval");
 		}
 		return status;
 		
@@ -210,7 +224,7 @@ public class PGDaoClass implements PostgreDaoInterface {
 
 	@Override
 	public int DenyReimbursement(int ReimbursementID,int ResolverID) {
-		String DenySQL = "UPDATE ers_reimbursement SET reimb_status_id = 0, reimb_resolved = CURRENT_TIMESTAMP() WHERE reimb_id = " + ReimbursementID;
+		String DenySQL = "UPDATE ers_reimbursement SET reimb_status_id = 0, reimb_resolved = CURRENT_TIMESTAMP WHERE reimb_id = " + ReimbursementID;
 		Connection conn = ConnectionFactory.getConnection();
 		int status=0;
 		try {
@@ -224,13 +238,34 @@ public class PGDaoClass implements PostgreDaoInterface {
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
+			log.error("sql error with denial query");
 		}
 		return status;
 		
 	}
 	@Override
 	public ArrayList <LoginEntity> GetAllEmployees() {
-		// TODO Auto-generated method stub
+		String GetAllUsers = "select * from ers_users;";
+		ArrayList <LoginEntity> UserTable = new ArrayList<>();
+		
+		
+		
+			Connection conn = ConnectionFactory.getConnection();
+					try {
+						Statement getall = conn.prepareStatement(GetAllUsers);
+						ResultSet users = getall.executeQuery(GetAllUsers);
+						while(users.next()) {
+							int userid, roleid;
+							String Fn,last,email,username,password;
+							userid = users.getInt("ers_users_id");
+							roleid = users.getInt("u"
+									
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 		return null;
 	}
 

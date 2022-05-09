@@ -3,6 +3,9 @@ package com.revature.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.revature.DAO.PGDaoClass;
@@ -24,6 +27,7 @@ Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
 Bob.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
 Bob.serializeNulls();
 Gson gson = Bob.setPrettyPrinting().create();
+
 
 String ReimbursementJSON = gson.toJson(ReimbursementTable);	
 
