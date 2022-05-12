@@ -27,7 +27,7 @@ Jacob W. Mockler
 jacobmockler@gmail.com
 
 LinkedIn:
-
+www.linkedin.com/in/jacob-mockler-1a205713b
 
 
 for Revature. 
